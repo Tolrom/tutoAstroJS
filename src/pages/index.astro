@@ -1,5 +1,7 @@
 ---
-
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import '../styles/global.css';
 ---
 
 <html lang="en">
@@ -11,9 +13,13 @@
 		<title>AstroJS</title>
 	</head>
 	<body>
-		<a href="/">Home</a>
-		<a href="/about/">About</a>
-		<a href="/blog/">Blog</a>
+		<Header />
 		<h1>J'utilise AstroJS !</h1>
+		<Footer />
+		<script>
+			document.querySelector('.hamburger')?.addEventListener('click', () => {
+			  document.querySelector('.nav-links')?.classList.toggle('expanded');
+			});
+		</script>
 	</body>
 </html>

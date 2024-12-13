@@ -1,15 +1,24 @@
 ---
+import Header from '../components/Header.astro';
+import Footer from "../components/Footer.astro";
+import '../styles/global.css';
+
 const   pageTitle = "About Me",
         identity = {
-            firstName: "Sarah",
-            country: "Canada",
-            occupation: "Technical Writer",
-            hobbies: ["photography", "birdwatching", "baseball"],
+            firstName: "Maxime",
+            country: "France",
+            occupation: "Developper",
+            hobbies: ["rocket league", "dofus", "rocket league"],
         },
         skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"],
         happy = true,
         finished = false,
-        goal = 3;
+        goal = 3,
+        style = {
+            skillColor: "navy",
+            fontWeight: "bold",
+            textCase: "capitalize"
+        };
 ---
 
 <html lang="en">
@@ -19,11 +28,25 @@ const   pageTitle = "About Me",
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{ pageTitle }</title>
+        <style
+            define:vars={{
+                'styleColor': style.skillColor,
+                'fontWeight': style.fontWeight,
+                'textCase': style.textCase,
+            }} >
+            h1 {
+            color: purple;
+            font-size: 4rem;
+            }
+            .skill {
+                color: var(--styleColor);
+                font-weight: var(--fontWeight);
+                text-transform: var(--textCase);
+            }
+        </style>
 	</head>
 	<body>
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-		<a href="/blog/">Blog</a>
+        <Header />
 		<h1>{ pageTitle }</h1>
         <p>Here are a few facts about me:</p>
         <ul>
@@ -35,7 +58,7 @@ const   pageTitle = "About Me",
         </ul>
         <p>My skills are:</p>
         <ul>
-            {skills.map((skill) => <li>{skill}</li>)}
+            {skills.map((skill) => <li class="skill">{skill}</li>)}
         </ul>
 
         {happy && <p>I am happy to be learning Astro!</p>}
@@ -44,5 +67,6 @@ const   pageTitle = "About Me",
 
         {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
         
+        <Footer />
 	</body>
 </html>
