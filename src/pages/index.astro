@@ -2,6 +2,17 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import '../styles/global.css';
+
+import { useStoryblokApi } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+ 
+const storyblokApi = useStoryblokApi()
+const { data } = await storyblokApi.get('cdn/stories/home', {
+  version: 'draft',
+})
+ 
+const story = data.story
 ---
 
 <html lang="en">
@@ -15,6 +26,9 @@ import '../styles/global.css';
 	<body>
 		<Header />
 		<h1>J'utilise AstroJS !</h1>
+		<BaseLayout>
+			<StoryblokComponent blok={story.content} />
+		</BaseLayout>
 		<Footer />
 		<script>
 			document.querySelector('.hamburger')?.addEventListener('click', () => {
